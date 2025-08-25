@@ -1,0 +1,378 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2project>
+    <name>Galactic Defender</name>
+    <description></description>
+    <version>1.0.0.0</version>
+    <author></author>
+    <author-email></author-email>
+    <author-website>http://</author-website>
+    <app-id>com.mycompany.myapp</app-id>
+    <unique-id>29iq7zn4vzi3d</unique-id>
+    <saved-with-version>28000</saved-with-version>
+    <used-plugins>
+        <plugin author="Scirra" id="Function" version="1">Function</plugin>
+        <plugin author="Scirra" id="Keyboard" version="1">Keyboard</plugin>
+        <plugin author="Scirra" id="Mouse" version="1">Mouse</plugin>
+        <plugin author="Scirra" id="Particles" version="1">Particles</plugin>
+        <plugin author="Scirra" id="Sprite" version="1">Sprite</plugin>
+        <plugin author="Scirra" id="Spritefont2" version="1">Sprite font</plugin>
+        <plugin author="Scirra" id="Text" version="1">Text</plugin>
+        <plugin author="Scirra" id="TiledBg" version="1">Tiled Background</plugin>
+        <plugin author="Scirra" id="Touch" version="1">Touch</plugin>
+    </used-plugins>
+    <used-behaviors>
+        <behavior author="Scirra" id="Flash" version="1">Flash</behavior>
+        <behavior author="Scirra" id="Sin" version="1">Sine</behavior>
+        <behavior author="Scirra" id="bound" version="1">Bound to layout</behavior>
+        <behavior author="Scirra" id="destroy" version="1">Destroy outside layout</behavior>
+    </used-behaviors>
+    <used-effects />
+    <configurations>
+        <configuration exporter-descname="HTML5" exporter-id="html5" name="HTML5" />
+    </configurations>
+    <window-size>
+        <width>768</width>
+        <height>480</height>
+    </window-size>
+    <pixel-rounding>0</pixel-rounding>
+    <preview-effects>1</preview-effects>
+    <use-loader-layout>0</use-loader-layout>
+    <configuration-settings>
+        <prop name="Clear background">Yes</prop>
+        <prop name="Downscaling">Medium quality</prop>
+        <prop name="Enable WebGL">On</prop>
+        <prop name="Fullscreen in browser">Letterbox scale</prop>
+        <prop name="Fullscreen scaling">High quality</prop>
+        <prop name="Loader style">Construct 2 splash</prop>
+        <prop name="Orientations">Any</prop>
+        <prop name="Pause on unfocus">No</prop>
+        <prop name="Physics engine">Box2D asm.js</prop>
+        <prop name="Preload sounds">Yes</prop>
+        <prop name="Preview browser">(default)</prop>
+        <prop name="Sampling">Linear</prop>
+        <prop name="Use high-DPI display">Yes</prop>
+    </configuration-settings>
+    <object-folder>
+        <object-type name="tb__blue" sid="215054435851325">
+            <plugin id="TiledBg" />
+            <texture original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Backgrounds\blue.png" />
+        </object-type>
+        <object-type name="spr__player" sid="827021576652251">
+            <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable name="x_speed" sid="159635329968766" type="number" />
+                <instance-variable name="y_speed" sid="627052812821473" type="number" />
+            </instance-variables>
+            <behaviors>
+                <behavior-type name="BoundToLayout" sid="310288874312135">
+                    <behavior id="bound" />
+                </behavior-type>
+                <behavior-type name="Flash" sid="907517958503711">
+                    <behavior id="Flash" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="827156261010047" speed="5">
+                    <frame duration="1" hotspotX="0.50505" hotspotY="0.506667" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\playerShip1_orange.png">
+                        <collision-poly>
+                            <point x="0.258929" y="0.386667" />
+                            <point x="0.5" y="0" />
+                            <point x="0.741071" y="0.386667" />
+                            <point x="0.883929" y="0.493333" />
+                            <point x="0.892857" y="0.84" />
+                            <point x="0.5" y="1" />
+                            <point x="0.107143" y="0.84" />
+                            <point x="0.116071" y="0.493333" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="spr__enemy" sid="418317948991659">
+            <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable name="hp" sid="606692582986176" type="number" />
+                <instance-variable name="level" sid="189788300053741" type="number" />
+            </instance-variables>
+            <behaviors>
+                <behavior-type name="Flash" sid="545307703878846">
+                    <behavior id="Flash" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="20" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="693343852918332" speed="0">
+                    <frame duration="1" hotspotX="0.505263" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyBlack1.png" />
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyBlack2.png" />
+                    <frame duration="1" hotspotX="0.504854" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyBlack3.png" />
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyBlack4.png" />
+                    <frame duration="1" hotspotX="0.505155" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyBlack5.png" />
+                    <frame duration="1" hotspotX="0.505376" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyBlue1.png" />
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyBlue2.png" />
+                    <frame duration="1" hotspotX="0.504854" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyBlue3.png" />
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyBlue4.png" />
+                    <frame duration="1" hotspotX="0.505155" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyBlue5.png" />
+                    <frame duration="1" hotspotX="0.505376" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyGreen1.png" />
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyGreen2.png" />
+                    <frame duration="1" hotspotX="0.504854" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyGreen3.png" />
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyGreen4.png" />
+                    <frame duration="1" hotspotX="0.505155" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyGreen5.png" />
+                    <frame duration="1" hotspotX="0.505376" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyRed1.png" />
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyRed2.png" />
+                    <frame duration="1" hotspotX="0.504854" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyRed3.png" />
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyRed4.png" />
+                    <frame duration="1" hotspotX="0.505155" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Enemies\enemyRed5.png" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="spr__laser" sid="665016589814895">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="557218308111392" speed="5">
+                    <frame duration="1" hotspotX="0.538462" hotspotY="0.513514" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Lasers\laserRed06.png">
+                        <collision-poly>
+                            <point x="0.153846" y="0.037037" />
+                            <point x="0.461538" y="0" />
+                            <point x="0.846154" y="0.037037" />
+                            <point x="0.769231" y="0.5" />
+                            <point x="0.769231" y="0.944444" />
+                            <point x="0.461538" y="1" />
+                            <point x="0.230769" y="0.944444" />
+                            <point x="0.230769" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Mouse" sid="216687433138115">
+            <plugin id="Mouse" />
+        </object-type>
+        <object-type name="txt__debug" sid="738286918904127">
+            <plugin id="Text" />
+        </object-type>
+        <object-type name="Keyboard" sid="570065816433372">
+            <plugin id="Keyboard" />
+        </object-type>
+        <object-type name="par__player" sid="417421901052796">
+            <plugin id="Particles" />
+            <texture />
+        </object-type>
+        <object-type name="par__enemy_1" sid="263757222945139">
+            <plugin id="Particles" />
+            <texture />
+        </object-type>
+        <object-type name="par__enemy_2" sid="134955902856341">
+            <plugin id="Particles" />
+            <texture />
+        </object-type>
+        <object-type name="par__enemy_3" sid="520781870581117">
+            <plugin id="Particles" />
+            <texture />
+        </object-type>
+        <object-type name="par__enemy_4" sid="471823225915067">
+            <plugin id="Particles" />
+            <texture />
+        </object-type>
+        <object-type name="Function" sid="660218328498741">
+            <plugin id="Function" />
+        </object-type>
+        <object-type name="spr_shield" sid="998956826271846">
+            <plugin id="Sprite" />
+            <behaviors>
+                <behavior-type name="Sine" sid="198983555855756">
+                    <behavior id="Sin" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="299915483506024" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Power-ups\shield_gold.png">
+                        <collision-poly>
+                            <point x="0.0333333" y="0.0333333" />
+                            <point x="0.5" y="0" />
+                            <point x="0.966667" y="0.0333333" />
+                            <point x="0.866667" y="0.5" />
+                            <point x="0.766667" y="0.766667" />
+                            <point x="0.5" y="0.966667" />
+                            <point x="0.2" y="0.8" />
+                            <point x="0.1" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="spr__shield_effect" sid="767316329613218">
+            <plugin id="Sprite" />
+            <behaviors>
+                <behavior-type name="Flash" sid="221763240275803">
+                    <behavior id="Flash" />
+                </behavior-type>
+                <behavior-type name="DestroyOutsideLayout" sid="621903787204113">
+                    <behavior id="destroy" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="435983443637140" speed="5">
+                    <frame duration="1" hotspotX="0.503759" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\Effects\shield1.png" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="sf__score" sid="592269988334991">
+            <plugin id="Spritefont2" />
+            <texture original-source="C:\Users\fuko9\Desktop\Sprite Font\Sprite Font.png" />
+        </object-type>
+        <object-type name="sf__health" sid="128199351524191">
+            <plugin id="Spritefont2" />
+            <texture original-source="C:\Users\fuko9\Desktop\Sprite Font\Sprite Font.png" />
+        </object-type>
+        <object-type name="Sprite" sid="370805576472812">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="437048514283325" speed="5">
+                    <frame duration="1" hotspotX="0" hotspotY="0" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\UI\playerLife1_orange.png">
+                        <collision-poly>
+                            <point x="0.30303" y="0.384615" />
+                            <point x="0.484848" y="0" />
+                            <point x="0.69697" y="0.384615" />
+                            <point x="0.969697" y="0.5" />
+                            <point x="0.848485" y="0.807692" />
+                            <point x="0.484848" y="0.961538" />
+                            <point x="0.151515" y="0.807692" />
+                            <point x="0" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Sprite2" sid="899865516201649">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="687247963401741" speed="5">
+                    <frame duration="1" hotspotX="0" hotspotY="1" original-source="C:\Users\fuko9\Desktop\Space shooter\Space shooter\UI\numeralX.png">
+                        <collision-poly>
+                            <point x="0.117647" y="0.117647" />
+                            <point x="0.470588" y="0.176471" />
+                            <point x="0.882353" y="0.117647" />
+                            <point x="0.823529" y="0.470588" />
+                            <point x="0.882353" y="0.882353" />
+                            <point x="0.470588" y="0.823529" />
+                            <point x="0.117647" y="0.882353" />
+                            <point x="0.176471" y="0.470588" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Sprite3" sid="489181901415865">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="332660567115288" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="spr__controls_1" sid="265998535569052">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="665912569934571" speed="5">
+                    <frame duration="1" hotspotX="0.50625" hotspotY="0.50625" original-source="C:\Users\fuko9\Desktop\Onscreen controls\transparentLight\transparentLight07.png">
+                        <collision-poly>
+                            <point x="0.32" y="0.32" />
+                            <point x="0.496" y="0" />
+                            <point x="0.688" y="0.312" />
+                            <point x="1" y="0.496" />
+                            <point x="0.688" y="0.688" />
+                            <point x="0.496" y="1" />
+                            <point x="0.312" y="0.688" />
+                            <point x="0" y="0.496" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="spr__controls_2" sid="608114895215677">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="595526155348732" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\fuko9\Desktop\Onscreen controls\transparentLight\transparentLight34.png">
+                        <collision-poly>
+                            <point x="0.15" y="0.15" />
+                            <point x="0.5" y="0.0125" />
+                            <point x="0.85" y="0.15" />
+                            <point x="1" y="0.5" />
+                            <point x="0.85" y="0.85" />
+                            <point x="0.5" y="1" />
+                            <point x="0.15" y="0.85" />
+                            <point x="0" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Touch" sid="227786023441037">
+            <plugin id="Touch" />
+        </object-type>
+        <object-type name="tb__btn_left" sid="942884786019073">
+            <plugin id="TiledBg" />
+            <texture />
+        </object-type>
+        <object-type name="tb__btn_right" sid="544359117696153">
+            <plugin id="TiledBg" />
+            <texture />
+        </object-type>
+        <object-type name="tb__btn_up" sid="778150622383549">
+            <plugin id="TiledBg" />
+            <texture />
+        </object-type>
+        <object-type name="spr__controls_3" sid="315112769676069">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="174844298461879" speed="5">
+                    <frame duration="1" hotspotX="0.50625" hotspotY="0.50625" original-source="C:\Users\fuko9\Desktop\Onscreen controls\transparentLight\transparentLight07.png">
+                        <collision-poly>
+                            <point x="0.32" y="0.32" />
+                            <point x="0.496" y="0" />
+                            <point x="0.688" y="0.312" />
+                            <point x="1" y="0.496" />
+                            <point x="0.688" y="0.688" />
+                            <point x="0.496" y="1" />
+                            <point x="0.312" y="0.688" />
+                            <point x="0" y="0.496" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="tb__btn_down" sid="230555243247310">
+            <plugin id="TiledBg" />
+            <texture />
+        </object-type>
+    </object-folder>
+    <families />
+    <layout-folder>
+        <layout>L1.xml</layout>
+    </layout-folder>
+    <event-folder>
+        <event-sheet>Event sheet 1.xml</event-sheet>
+    </event-folder>
+    <global-instances>
+        <global-instance type="Mouse" uid="4" />
+        <global-instance type="Keyboard" uid="6" />
+        <global-instance type="Function" uid="5" />
+        <global-instance type="Touch" uid="21">
+            <properties>
+                <use-mouse-input>Yes</use-mouse-input>
+            </properties>
+        </global-instance>
+    </global-instances>
+    <sounds-folder />
+    <music-folder />
+    <files-folder>
+        <file-folder name="Icons">
+            <file name="icon-16.png" />
+            <file name="icon-32.png" />
+            <file name="icon-114.png" />
+            <file name="icon-128.png" />
+            <file name="icon-256.png" />
+            <file name="loading-logo.png" />
+        </file-folder>
+    </files-folder>
+</c2project>

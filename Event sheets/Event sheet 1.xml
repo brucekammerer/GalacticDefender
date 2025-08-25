@@ -1,0 +1,657 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>Event sheet 1</name>
+    <events>
+        <variable constant="0" name="hp" sid="452516274949297" static="0" type="number">0</variable>
+        <variable constant="0" name="game_over" sid="984411344184117" static="0" type="number">0</variable>
+        <variable constant="0" name="shield_is_on" sid="198562155005548" static="0" type="number">0</variable>
+        <variable constant="0" name="score" sid="721649765413226" static="0" type="number">0</variable>
+        <variable constant="1" name="MAX_HP" sid="498265690167976" static="0" type="number">3</variable>
+        <variable constant="1" name="ENEMY_SPEED" sid="712673558471435" static="0" type="number">100</variable>
+        <variable constant="1" name="SHIELD_SPEED" sid="799220757002570" static="0" type="number">50</variable>
+        <variable constant="1" name="LASER_SPEED" sid="165697180725210" static="0" type="number">200</variable>
+        <variable constant="1" name="reload_time" sid="945306672703791" static="0" type="number">0.5</variable>
+        <variable constant="1" name="SHIELD_MAGNITUDE" sid="888112882325824" static="0" type="number">50</variable>
+        <variable constant="1" name="BG_SPEED" sid="951496298220976" static="0" type="number">5</variable>
+        <variable constant="0" name="can_shoot" sid="529477145053910" static="0" type="number">1</variable>
+        <event-group description="" sid="580177838255490" title="Startup">
+            <sub-events>
+                <event-block sid="660102710198902">
+                    <conditions>
+                        <condition id="-2" name="On start of layout" sid="141705799336744" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set cursor style" sid="617233608738000" type="Mouse">
+                            <param id="0" name="Cursor style">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="680083962239373" type="System">
+                            <param id="0" name="Variable">shield_is_on</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="215031479732341" type="System">
+                            <param id="0" name="Variable">score</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="144845731069682" type="System">
+                            <param id="0" name="Variable">hp</param>
+                            <param id="1" name="Value">MAX_HP</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="321271049382368" title="EveryX">
+            <sub-events>
+                <event-block sid="692974239635575">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="826943188674921" type="System">
+                            <param id="0" name="Interval (seconds)">random(30, 50)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Create object" sid="792475101857981" type="System">
+                            <param id="0" name="Object to create">spr_shield</param>
+                            <param id="1" name="Layer">&quot;Game&quot;</param>
+                            <param id="2" name="X">0</param>
+                            <param id="3" name="Y">0</param>
+                        </action>
+                        <action behavior="Sine" id="2" name="Set magnitude" sid="761495827122016" type="spr_shield">
+                            <param id="0" name="Magnitude">SHIELD_MAGNITUDE</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="224748407793350" type="spr_shield">
+                            <param id="0" name="X">random(SHIELD_MAGNITUDE + spr_shield.Width/2, LayoutWidth - SHIELD_MAGNITUDE - spr_shield.Width/2)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="194548132445621">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="109389486240592" type="System">
+                            <param id="0" name="Interval (seconds)">1.0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Create object" sid="825050263708060" type="System">
+                            <param id="0" name="Object to create">spr__enemy</param>
+                            <param id="1" name="Layer">&quot;Game&quot;</param>
+                            <param id="2" name="X">random(spr__enemy.Width / 2,  LayoutWidth - spr__enemy.Width/2)</param>
+                            <param id="3" name="Y">random(-300, -100)</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="789989653764900" type="spr__enemy">
+                            <param id="0" name="Frame number">floor(random(0, 20))</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="757707738752377" type="spr__enemy">
+                            <param id="0" name="Instance variable">level</param>
+                            <param id="1" name="Value">Function.Call(&quot;get_object_type&quot;, spr__enemy.AnimationFrame)</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="655080400568742" type="spr__enemy">
+                            <param id="0" name="Instance variable">hp</param>
+                            <param id="1" name="Value">spr__enemy.level</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="354313071032427">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="554241666646455" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="161225918294743" type="tb__blue">
+                            <param id="0" name="Y">Self.Y + BG_SPEED</param>
+                        </action>
+                        <action id="-2" name="Set Y" sid="354212161266824" type="spr__laser">
+                            <param id="0" name="Y">Self.Y - LASER_SPEED*dt</param>
+                        </action>
+                        <action id="-2" name="Set Y" sid="820674435707688" type="spr__enemy">
+                            <param id="0" name="Y">Self.Y + enemy_speed*dt</param>
+                        </action>
+                        <action id="-2" name="Set Y" sid="609687344414934" type="spr_shield">
+                            <param id="0" name="Y">Self.Y + SHIELD_SPEED*dt</param>
+                        </action>
+                        <action id="0" name="Set text" sid="237612571541974" type="sf__score">
+                            <param id="0" name="Text">score</param>
+                        </action>
+                        <action id="0" name="Set text" sid="893512429385074" type="sf__health">
+                            <param id="0" name="Text">hp</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="411512999971760" title="PlayerControls">
+            <sub-events>
+                <event-block sid="289122266518511">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="107593144924934" type="System">
+                            <param id="0" name="Variable">can_shoot</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="142786953384529" type="Keyboard">
+                            <param id="0" name="Key">32</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Create object" sid="537067765895929" type="System">
+                            <param id="0" name="Object to create">spr__laser</param>
+                            <param id="1" name="Layer">&quot;Game&quot;</param>
+                            <param id="2" name="X">spr__player.X + 10</param>
+                            <param id="3" name="Y">spr__player.Y - 66</param>
+                        </action>
+                        <action id="-3" name="Create object" sid="507380129342552" type="System">
+                            <param id="0" name="Object to create">spr__laser</param>
+                            <param id="1" name="Layer">&quot;Game&quot;</param>
+                            <param id="2" name="X">spr__player.X - 10</param>
+                            <param id="3" name="Y">spr__player.Y - 66</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="215964548758395" type="System">
+                            <param id="0" name="Variable">can_shoot</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="995445181821340" type="System">
+                            <param id="0" name="Seconds">RELOAD_TIME</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="452479238979780" type="System">
+                            <param id="0" name="Variable">can_shoot</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="689473260141439">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="423929586830316" type="System">
+                            <param id="0" name="Variable">can_shoot</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="4" name="Is touching object" sid="623522689612710" type="Touch">
+                            <param id="0" name="Object">spr__controls_2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Create object" sid="964707688252271" type="System">
+                            <param id="0" name="Object to create">spr__laser</param>
+                            <param id="1" name="Layer">&quot;Game&quot;</param>
+                            <param id="2" name="X">spr__player.X + 10</param>
+                            <param id="3" name="Y">spr__player.Y - 66</param>
+                        </action>
+                        <action id="-3" name="Create object" sid="580044151773624" type="System">
+                            <param id="0" name="Object to create">spr__laser</param>
+                            <param id="1" name="Layer">&quot;Game&quot;</param>
+                            <param id="2" name="X">spr__player.X - 10</param>
+                            <param id="3" name="Y">spr__player.Y - 66</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="438796300733176" type="System">
+                            <param id="0" name="Variable">can_shoot</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="864422774525405" type="System">
+                            <param id="0" name="Seconds">RELOAD_TIME</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="401744497280025" type="System">
+                            <param id="0" name="Variable">can_shoot</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="507108543840135">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="226021597111141" type="Keyboard">
+                            <param id="0" name="Key">65</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="131397480394604" type="spr__player">
+                            <param id="0" name="X">Self.X - Self.x_speed*dt</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="271383589348911">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="965625093216891" type="Keyboard">
+                            <param id="0" name="Key">68</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="299836268740242" type="spr__player">
+                            <param id="0" name="X">Self.X + Self.x_speed*dt</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="709307844154148">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="422417752932780" type="Keyboard">
+                            <param id="0" name="Key">87</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="592629574117633" type="spr__player">
+                            <param id="0" name="Y">Self.Y - Self.y_speed*dt</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="638725147639747">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="671585082215231" type="Keyboard">
+                            <param id="0" name="Key">83</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="304741024698566" type="spr__player">
+                            <param id="0" name="Y">Self.Y + Self.y_speed*dt</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="957289997041895">
+                    <conditions>
+                        <condition id="4" name="Is touching object" sid="233767915561064" type="Touch">
+                            <param id="0" name="Object">tb__btn_left</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="369371729343981" type="spr__player">
+                            <param id="0" name="X">Self.X - Self.x_speed*dt</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="546558463640115">
+                    <conditions>
+                        <condition id="4" name="Is touching object" sid="331873679367698" type="Touch">
+                            <param id="0" name="Object">tb__btn_right</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="593118882436590" type="spr__player">
+                            <param id="0" name="X">Self.X + Self.x_speed*dt</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="667323340401828">
+                    <conditions>
+                        <condition id="4" name="Is touching object" sid="108627301111813" type="Touch">
+                            <param id="0" name="Object">tb__btn_up</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="900508441507108" type="spr__player">
+                            <param id="0" name="Y">Self.Y - Self.y_speed*dt</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="677235203243415">
+                    <conditions>
+                        <condition id="4" name="Is touching object" sid="622660575430263" type="Touch">
+                            <param id="0" name="Object">tb__btn_down</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="422744460050181" type="spr__player">
+                            <param id="0" name="Y">Self.Y + Self.y_speed*dt</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="271840854085246" title="Player">
+            <sub-events>
+                <event-block sid="273412760014279">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="889985247400968" type="spr__player">
+                            <param id="0" name="Object">spr_shield</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="520797679700521" type="spr_shield" />
+                        <action id="0" name="Spawn another object" sid="607275546627803" type="spr__player">
+                            <param id="0" name="Object">spr__shield_effect</param>
+                            <param id="1" name="Layer">&quot;Game&quot;</param>
+                            <param id="2" name="Image point">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="977737840204777" type="System">
+                            <param id="0" name="Variable">shield_is_on</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="755674368888059" type="System">
+                            <param id="0" name="Seconds">10.0</param>
+                        </action>
+                        <action behavior="Flash" id="0" name="Flash" sid="962815813570341" type="spr__shield_effect">
+                            <param id="0" name="&apos;On&apos; time">0.1</param>
+                            <param id="1" name="&apos;Off&apos; time">0.1</param>
+                            <param id="2" name="Duration">1.0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="826587221694983">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="361655982700748" type="spr__player">
+                            <param id="0" name="Object">spr__enemy</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="586449303501557" type="System">
+                            <param id="0" name="Variable">shield_is_on</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Flash" id="0" name="Flash" sid="804137609546337" type="spr__player">
+                            <param id="0" name="&apos;On&apos; time">0.1</param>
+                            <param id="1" name="&apos;Off&apos; time">0.1</param>
+                            <param id="2" name="Duration">0.5</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="305044407061454" type="spr__enemy">
+                            <param id="0" name="Instance variable">hp</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-11" name="Subtract from" sid="780219180549325" type="System">
+                            <param id="0" name="Variable">hp</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="698370917394963">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="973418437548084" type="System">
+                            <param id="0" name="Variable">hp</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Spawn another object" sid="532146503100025" type="spr__player">
+                            <param id="0" name="Object">par__player</param>
+                            <param id="1" name="Layer">&quot;Game&quot;</param>
+                            <param id="2" name="Image point">0</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="523043114243907" type="spr__player" />
+                        <action id="-16" name="Wait" sid="219986953977673" type="System">
+                            <param id="0" name="Seconds">2.0</param>
+                        </action>
+                        <action id="-26" name="Restart layout" sid="358815750610532" type="System" />
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="948170067131887" title="OutsideLayout">
+            <sub-events>
+                <event-block sid="827605022369193">
+                    <conditions>
+                        <condition id="-4" name="Is outside layout" sid="890444985640615" type="spr__laser" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="734022233411145" type="spr__laser" />
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="997627284565589" title="Enemy">
+            <sub-events>
+                <event-block sid="908835695469101">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="731391805299655" type="spr__enemy">
+                            <param id="0" name="Object">spr__laser</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Flash" id="0" name="Flash" sid="721089797708306" type="spr__enemy">
+                            <param id="0" name="&apos;On&apos; time">0.1</param>
+                            <param id="1" name="&apos;Off&apos; time">0.1</param>
+                            <param id="2" name="Duration">0.5</param>
+                        </action>
+                        <action id="-12" name="Subtract from" sid="433111036403418" type="spr__enemy">
+                            <param id="0" name="Instance variable">hp</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="888514861244989" type="spr__laser" />
+                    </actions>
+                </event-block>
+                <event-block sid="861836831628030">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="165585250474810" type="spr__enemy">
+                            <param id="0" name="Instance variable">hp</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="466005393393360">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="751400004575290" type="System">
+                                    <param id="0" name="First value">spr__enemy.level</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Spawn another object" sid="196739721750043" type="spr__enemy">
+                                    <param id="0" name="Object">par__enemy_1</param>
+                                    <param id="1" name="Layer">&quot;Game&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="757204883349142" type="spr__enemy" />
+                            </actions>
+                        </event-block>
+                        <event-block sid="660096960118000">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="850687216118563" type="System">
+                                    <param id="0" name="First value">spr__enemy.level</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Spawn another object" sid="213295732179217" type="spr__enemy">
+                                    <param id="0" name="Object">par__enemy_2</param>
+                                    <param id="1" name="Layer">&quot;Game&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="385739136860185" type="spr__enemy" />
+                            </actions>
+                        </event-block>
+                        <event-block sid="482835009453626">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="696525506522657" type="System">
+                                    <param id="0" name="First value">spr__enemy.level</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">3</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Spawn another object" sid="216930015466814" type="spr__enemy">
+                                    <param id="0" name="Object">par__enemy_3</param>
+                                    <param id="1" name="Layer">&quot;Game&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="558985969018118" type="spr__enemy" />
+                            </actions>
+                        </event-block>
+                        <event-block sid="835958000920796">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="626887491315630" type="System">
+                                    <param id="0" name="First value">spr__enemy.level</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">4</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Spawn another object" sid="912091744022050" type="spr__enemy">
+                                    <param id="0" name="Object">par__enemy_4</param>
+                                    <param id="1" name="Layer">&quot;Game&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="248168915226817" type="spr__enemy" />
+                            </actions>
+                        </event-block>
+                        <event-block sid="755339502703219">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="840880458113995" type="System">
+                                    <param id="0" name="Variable">score</param>
+                                    <param id="1" name="Value">score + spr__enemy.level*10</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="221798987622985" title="Debug">
+            <sub-events>
+                <event-block sid="798805269057139">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="326247521108887" type="System">
+                            <param id="0" name="Interval (seconds)">1.0</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="501311188044713" title="Shield">
+            <sub-events>
+                <event-block sid="608623948970346">
+                    <conditions>
+                        <condition behavior="Flash" id="1" name="On flash ended" sid="169536344854801" type="spr__shield_effect" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="306642322352213" type="spr__shield_effect" />
+                        <action id="-9" name="Set value" sid="765448867184688" type="System">
+                            <param id="0" name="Variable">shield_is_on</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="731930403792193">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="957421745075315" type="spr__shield_effect">
+                            <param id="0" name="Object">spr__enemy</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="300470076207071" type="spr__enemy">
+                            <param id="0" name="Instance variable">hp</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="484485055832186">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="759206358571672" type="System">
+                            <param id="0" name="Variable">shield_is_on</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Set position" sid="980601760526590" type="spr__shield_effect">
+                            <param id="0" name="X">spr__player.X</param>
+                            <param id="1" name="Y">spr__player.Y</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="636163962987063" title="Functions">
+            <sub-events>
+                <event-block sid="233054094885185">
+                    <conditions>
+                        <condition id="0" name="On function" sid="337205402183794" type="Function">
+                            <param id="0" name="Name">&quot;get_object_type&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="156805848291787">
+                            <conditions>
+                                <condition id="1" name="Compare parameter" sid="727820156554778" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="1" name="Compare parameter" sid="384867810442266" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">4</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set return value" sid="613518985478868" type="Function">
+                                    <param id="0" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="139345266237696">
+                            <conditions>
+                                <condition id="1" name="Compare parameter" sid="178840360769789" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">5</param>
+                                </condition>
+                                <condition id="1" name="Compare parameter" sid="939752345237565" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">9</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set return value" sid="491661255808496" type="Function">
+                                    <param id="0" name="Value">2</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="879580093924427">
+                            <conditions>
+                                <condition id="1" name="Compare parameter" sid="832410306029010" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">10</param>
+                                </condition>
+                                <condition id="1" name="Compare parameter" sid="779977848600550" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">14</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set return value" sid="663783082533281" type="Function">
+                                    <param id="0" name="Value">3</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="883457732704745">
+                            <conditions>
+                                <condition id="1" name="Compare parameter" sid="275990718051597" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">15</param>
+                                </condition>
+                                <condition id="1" name="Compare parameter" sid="117580206438301" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">19</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set return value" sid="588566754309672" type="Function">
+                                    <param id="0" name="Value">4</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-block sid="145667662220092">
+            <conditions>
+                <condition id="-2" name="Compare Y" sid="869125362379967" type="tb__blue">
+                    <param id="0" name="Comparison">5</param>
+                    <param id="1" name="Y co-ordinate">480</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-2" name="Set Y" sid="793489178214472" type="tb__blue">
+                    <param id="0" name="Y">-480</param>
+                </action>
+            </actions>
+        </event-block>
+    </events>
+</c2eventsheet>
